@@ -1,0 +1,30 @@
+
+===================================================================================================
+
+
+Windows Virtual Machines Documentation
+https://docs.microsoft.com/nb-no/azure/virtual-machines/windows/index
+
+Create and manage Windows VMs
+Create and manage VM disks
+Automate VM configuration
+Create custom VM images
+Create highly available VMs
+Create a VM scale set
+Load balance VMs
+Manage VMs with virtual networks
+Backup VMs
+Monitor VMs
+Manage security on VMs
+Create a continuous integration pipeline with Visual Studio
+Install a SQL\IIS\.NET stack
+Secure a web server with SSL
+
+
+===================================================================================================
+
+
+
+
+
+
