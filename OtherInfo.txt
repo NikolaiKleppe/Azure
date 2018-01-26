@@ -1,0 +1,4 @@
+Git login
+    git config --global credential.helper wincred
+
+
