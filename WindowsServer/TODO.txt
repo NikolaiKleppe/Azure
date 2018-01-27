@@ -12,6 +12,7 @@ Create custom VM images
 Create highly available VMs
 Create a VM scale set
 Load balance VMs
+	https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-internet-overview
 Manage VMs with virtual networks
 Backup VMs
 Monitor VMs
