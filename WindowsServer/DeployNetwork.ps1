@@ -99,14 +99,17 @@ $NsgRule = New-AzureRmNetworkSecurityRuleConfig `
 
 #Network Security Group    
 $GetNSG = Get-AzureRmNetworkSecurityGroup
-$Nsg = New-AzureRmNetworkSecurityGroup `
-    -ResourceGroupName $ResourceGroup `
-    -Location $Location `
-    -Name $NsgName `
-    -SecurityRules $NsgRule
-    
-    
 
+If (!($GetNSG.Name -eq $NsgName)) {
+	$Nsg = New-AzureRmNetworkSecurityGroup `
+		-ResourceGroupName $ResourceGroup `
+		-Location $Location `
+		-Name $NsgName `
+		-SecurityRules $NsgRule
+}    
+Else {
+	Write-Host "Using existing NetworkSecurityGroup"
+}
     
     
 #Add NSG to subnet
@@ -130,21 +133,28 @@ Function SetSubnetConfig {
 
 Function CreateNetworkInterface {
     # Network interface card
-    Try {
-        New-AzureRmNetworkInterface `
-        -ResourceGroupName $ResourceGroup `
-        -Location $Location `
-        -Name $NICName `
-        -SubnetId $vnet.Subnets[0].Id `
-        -PublicIpAddressId $PublicIP.Id
-    }
-    Catch {
-        Write-Error $_
-    }
+	$GetNIC = Get-AzureRmNetworkInterface
+	If (!($GetNIC.Name -eq $NICName)) {
+		Try {
+			New-AzureRmNetworkInterface `
+			-ResourceGroupName $ResourceGroup `
+			-Location $Location `
+			-Name $NICName `
+			-SubnetId $vnet.Subnets[0].Id `
+			-PublicIpAddressId $PublicIP.Id
+		}
+		Catch {
+			Write-Error $_
+		}
+	}
+	Else {
+		Write-Host "Using existing NIC"
+	}
 }   
     
     
 Function SetVirtualNetwork {
+#Dont think we need if check here, as it just updates the network settings instead of creating then.
     Try {
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     }
