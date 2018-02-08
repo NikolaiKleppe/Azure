@@ -28,6 +28,8 @@ TOOD NEXT:
 ==================================================================================================
 
 
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-example
+
 
 Create and manage VM disks
 Automate VM configuration
