@@ -8,11 +8,11 @@
 $cred = Get-Credential
 
 #OS
-$ComputerName = "AW-T-01"
+$ComputerName = "AW-T-02"
 $VMSize       = "Standard_A1"
 
 #DISK
-$DiskName       = "disk_1"
+$DiskName       = "disk_2"
 $DiskSize       = "128"
 $CreateOption   = "FromImage"
 $Caching        = "ReadWrite"
