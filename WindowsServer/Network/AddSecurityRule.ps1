@@ -1,5 +1,5 @@
 
-#Adds to existing Security Group, which can contain multuple rule sets.
+#Adds NIC to existing Security Group, which can contain multuple rule sets.
 #https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-nsg-arm-ps
 
 $IpToAllow              = "81.166.225.0/24"
