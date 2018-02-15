@@ -5,29 +5,35 @@ https://docs.microsoft.com/nb-no/azure/virtual-machines/windows/index
 
 
 
-===================================================================================================
-===Create and manage Windows VMs (with network configuration)===
-    https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm
+==================================================================================================
+
     
 Storage Account info:
     https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account
     
     
-
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-example
 
 ==================================================================================================
 
 
-https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-example
+
 
 Create and manage Windows VMs       [X]
-Create and manage VM disks      
+    https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm
+    
+Create and manage VM disks    
+    https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-data-disk
+    NEXT: Prepare data disks
+
+    
 Automate VM configuration
 Create custom VM images
 Create highly available VMs
 Create a VM scale set
 Load balance VMs
 	https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-internet-overview
+    
 Manage VMs with virtual networks
 Backup VMs
 Monitor VMs
