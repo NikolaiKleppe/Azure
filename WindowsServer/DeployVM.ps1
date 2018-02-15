@@ -7,26 +7,49 @@
 
 $cred = Get-Credential
 
+#Variable number for:
+# VM
+# Disk
+# Network Interface Card
+$VmNumber = "03"
+
+
 #OS
-$ComputerName = "AW-T-02"
+$ComputerName = "AW-T-$VmNumber"
 $VMSize       = "Standard_A1"
 
+
+
+
 #DISK
-$DiskName       = "disk_2"
+$DiskName       = "disk_$VmNumber"
 $DiskSize       = "128"
 $CreateOption   = "FromImage"
 $Caching        = "ReadWrite"
 $StorageAccount = "https://nikmystorageaccount.blob.core.windows.net/disks/"
 
+
+
+
 #NETWORK
-$NetworkInterfaceName = "NIC_01"
+$NetworkInterfaceName = "NIC_$VmNumber"
+
 #$NetworkInterfaceID  = Get-AzureRmNetworkInterface | Where-Object {$_.Name -eq $NetworkInterfaceName}
 $NetworkInterfaceID   = Find-AzureRmResource -ResourceNameContains $NetworkInterfaceName
+If ([string]::IsNullOrEmpty($NetworkInterfaceID)) {
+    Write-Error "$NetworkInterfaceName does not exist, exiting"
+    Exit
+}
+
+
 
 
 #RESOURCE GROUP
 $ResourceGroupName = "myResourceGroup"
 $ResourceGroup     = Get-AzureRmResourceGroup | Where-Object {$_.ResourceGroupName -eq $ResourceGroupName}
+
+
+
 
 
 #Initial image settings
@@ -69,7 +92,8 @@ $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $NetworkInterfaceID.ResourceId
 
 Try {
     Write-Output "Creating VM"
-    New-AzureRmVM -ResourceGroupName $ResourceGroup.ResourceGroupName -Location "westeurope" -VM $vm
+    New-AzureRmVM -ResourceGroupName $ResourceGroup.ResourceGroupName -Location "westeurope" -VM $vm -AsJob
+    #See AsJob status with "Job"
 }
 Catch {
     Write-Error $_
