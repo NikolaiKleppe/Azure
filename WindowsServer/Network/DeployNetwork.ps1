@@ -3,18 +3,27 @@
 ########-Common Variables-#########
 
 #Names
-$ResourceGroup = "myResourceGroup"
-$Location      = "westeurope"
+$ResourceGroup          = "myResourceGroup"
+$Location               = "westeurope"
+$NsRuleName             = "AllowInboundSubnetHome"
 
-#Network
-$SubnetAddressPrefix = "192.168.1.0/24"
-$VnetAddressPrefix   = "192.168.0.0/16"
+#IP
+$SubnetAddressPrefix    = "192.168.1.0/24"
+$VnetAddressPrefix      = "192.168.0.0/16"
+$PublicIpName           = "publicIPaddress_03"
 
-$NICName             = "NIC_01"
-$VnetName            = "vnet_01"
-$PublicIpName        = "publicIPaddress_01"
-$SubnetName          = "Subnet_01"
-$NsgName             = "NetWorkSecurityGroup_01"
+#Security
+$IpToAllow              = "81.166.225.0/24"
+
+#NIC
+$NICName                = "NIC_03"
+$NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" -Name $NICName
+
+
+$VnetName               = "vnet_01"
+$SubnetName             = "Subnet_01"
+$NsgName                = "NetWorkSecurityGroup_01"
+
 
 ####################################
 
@@ -85,22 +94,22 @@ Else {
 #Network security rules
 #Inbound allow port 3389
 $NsgRule = New-AzureRmNetworkSecurityRuleConfig `
-    -Name NSGRule_01 `
+    -Name $NsRuleName `
     -Protocol Tcp `
     -Direction Inbound `
     -Priority 1000 `
-    -SourceAddressPrefix * `
+    -SourceAddressPrefix $IpToAllow `
     -SourcePortRange * `
     -DestinationAddressPrefix * `
-    -DestinationPortRange 3389 `
+    -DestinationPortRange * `
     -Access Allow
     
 
 
 #Network Security Group    
-$GetNSG = Get-AzureRmNetworkSecurityGroup
+$GetNSG = Get-AzureRmNetworkSecurityGroup -ResourceGroupName $ResourceGroup -Name $NsgName
 
-If (!($GetNSG.Name -eq $NsgName)) {
+If (!([string]::IsNullOrEmpty($GetNSG))) {
 	$Nsg = New-AzureRmNetworkSecurityGroup `
 		-ResourceGroupName $ResourceGroup `
 		-Location $Location `
@@ -108,7 +117,7 @@ If (!($GetNSG.Name -eq $NsgName)) {
 		-SecurityRules $NsgRule
 }    
 Else {
-	Write-Host "Using existing NetworkSecurityGroup"
+	Write-Host "Using existing NetworkSecurityGroup: $GetNSG"
 }
     
     
@@ -125,6 +134,11 @@ Function SetSubnetConfig {
         Write-Error $_
     }
 }   
+
+Function AssociateSecurityRuleToNIC {
+    $NIC.NetworkSecurityGroup = $NSG
+    $NIC | Set-AzureRmNetworkInterface
+}
     
     
 ####################################################################### 
@@ -133,8 +147,8 @@ Function SetSubnetConfig {
 
 Function CreateNetworkInterface {
     # Network interface card
-	$GetNIC = Get-AzureRmNetworkInterface
-	If (!($GetNIC.Name -eq $NICName)) {
+
+	If (!([string]::IsNullOrEmpty($NIC))) {
 		Try {
 			New-AzureRmNetworkInterface `
 			-ResourceGroupName $ResourceGroup `
@@ -154,7 +168,6 @@ Function CreateNetworkInterface {
     
     
 Function SetVirtualNetwork {
-#Dont think we need if check here, as it just updates the network settings instead of creating then.
     Try {
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     }
