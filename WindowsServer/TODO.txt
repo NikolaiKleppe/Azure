@@ -19,15 +19,17 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-e
 
 
 
-Create and manage Windows VMs       [X]
+Create and manage Windows VMs                                           [X]
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm
     
-Create and manage VM disks    
+Create and manage VM disks                                              [X]
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-data-disk
-    NEXT: Prepare data disks
 
     
 Automate VM configuration
+
+
+
 Create custom VM images
 Create highly available VMs
 Create a VM scale set
