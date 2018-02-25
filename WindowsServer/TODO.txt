@@ -26,7 +26,7 @@ Create and manage VM disks                                              [X]
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-data-disk
 
     
-Automate VM configuration
+Automate VM configuration                                               [X]
     https://blogs.technet.microsoft.com/stefan_stranger/2017/07/31/using-azure-custom-script-extension-to-execute-scripts-on-azure-vms/
     https://blog.azureandbeyond.com/2017/01/04/custom-script-extensions/
 
