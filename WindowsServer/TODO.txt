@@ -35,6 +35,8 @@ Automate VM configuration                                               [X]
     
     
 Create custom VM images
+	TODO NEXT: Create a VM from image
+	
 Create highly available VMs
 Create a VM scale set
 Load balance VMs
