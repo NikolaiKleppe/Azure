@@ -1,3 +1,4 @@
+#https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-custom-images
 #Requirements:
 #First do a sysprep on the VM. (Ref doc)
 

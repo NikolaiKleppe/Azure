@@ -54,3 +54,21 @@
     Get-AzureRmVMSize -Location "westeurope"
     
     
+    
+#Get created images
+$images = Find-AzureRMResource -ResourceType Microsoft.Compute/images 
+$images.name
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

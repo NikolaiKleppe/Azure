@@ -10,14 +10,14 @@ $NsRuleName             = "AllowInboundSubnetHome"
 #IP
 $SubnetAddressPrefix    = "192.168.1.0/24"
 $VnetAddressPrefix      = "192.168.0.0/16"
-$PublicIpName           = "publicIPaddress_03"
+$PublicIpName           = "publicIPaddress_04"
 
 #Security
 $IpToAllow              = "81.166.225.0/24"
 
 #NIC
-$NICName                = "NIC_03"
-$NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" -Name $NICName
+$NICName                = "NIC_04"
+$NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" -Name $NICName -ErrorAction SilentlyContinue
 
 
 $VnetName               = "vnet_01"
@@ -90,26 +90,34 @@ Else {
 # Network security
     
 
-
-#Network security rules
-#Inbound allow port 3389
-$NsgRule = New-AzureRmNetworkSecurityRuleConfig `
-    -Name $NsRuleName `
-    -Protocol Tcp `
-    -Direction Inbound `
-    -Priority 1000 `
-    -SourceAddressPrefix $IpToAllow `
-    -SourcePortRange * `
-    -DestinationAddressPrefix * `
-    -DestinationPortRange * `
-    -Access Allow
-    
-
-
 #Network Security Group    
-$GetNSG = Get-AzureRmNetworkSecurityGroup -ResourceGroupName $ResourceGroup -Name $NsgName
+$GetNSG = Get-AzureRmNetworkSecurityGroup -ResourceGroupName $ResourceGroup -Name $NsgName 
 
-If (!([string]::IsNullOrEmpty($GetNSG))) {
+$GetNsgRule = Get-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $GetNSG
+
+If (([string]::IsNullOrEmpty($GetNsgRule))) {
+    #Network security rules
+    #Inbound allow port 3389
+    $NsgRule = New-AzureRmNetworkSecurityRuleConfig `
+        -Name $NsRuleName `
+        -Protocol Tcp `
+        -Direction Inbound `
+        -Priority 1000 `
+        -SourceAddressPrefix $IpToAllow `
+        -SourcePortRange * `
+        -DestinationAddressPrefix * `
+        -DestinationPortRange * `
+        -Access Allow
+}
+Else {
+    Write-Output "Using existing security rule: $NsgName"
+    $NsgRule = Set-AzureRmNetworkSecurityRuleConfig `
+        -Name $NsRuleName -NetworkSecurityGroup $GetNSG
+}
+
+
+
+If (([string]::IsNullOrEmpty($GetNSG))) {
 	$Nsg = New-AzureRmNetworkSecurityGroup `
 		-ResourceGroupName $ResourceGroup `
 		-Location $Location `
@@ -118,6 +126,7 @@ If (!([string]::IsNullOrEmpty($GetNSG))) {
 }    
 Else {
 	Write-Host "Using existing NetworkSecurityGroup: $GetNSG"
+    $Nsg = $GetNSG
 }
     
     
@@ -136,7 +145,15 @@ Function SetSubnetConfig {
 }   
 
 Function AssociateSecurityRuleToNIC {
-    $NIC.NetworkSecurityGroup = $NSG
+    Try {
+        Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $Nsg
+    }
+    Catch {
+        Write-Error $_
+        Exit
+    }
+
+    $NIC.NetworkSecurityGroup = $Nsg
     $NIC | Set-AzureRmNetworkInterface
 }
     
@@ -148,8 +165,9 @@ Function AssociateSecurityRuleToNIC {
 Function CreateNetworkInterface {
     # Network interface card
 
-	If (!([string]::IsNullOrEmpty($NIC))) {
+	If (([string]::IsNullOrEmpty($NIC))) {
 		Try {
+            Write-Host "Creating new NIC"
 			New-AzureRmNetworkInterface `
 			-ResourceGroupName $ResourceGroup `
 			-Location $Location `
@@ -181,119 +199,7 @@ CreateNetworkInterface
 SetSubnetConfig
 SetVirtualNetwork
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+AssociateSecurityRuleToNIC
 
 
 
