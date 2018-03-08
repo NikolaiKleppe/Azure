@@ -17,6 +17,7 @@ $VmNumber = "03"
 #OS
 $ComputerName = "AW-T-$VmNumber"
 $VMSize       = "Standard_A1"
+#TODO: Change to Standard_B1S
 
 
 

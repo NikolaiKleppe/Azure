@@ -1,3 +1,5 @@
+Main: https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm    
+
 
 ===================================================================================================
 Windows Virtual Machines Documentation
@@ -10,7 +12,7 @@ https://docs.microsoft.com/nb-no/azure/virtual-machines/windows/index
     
 Storage Account info:
     https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account
-    
+
     
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-example
 
@@ -34,10 +36,15 @@ Automate VM configuration                                               [X]
     
     
     
-Create custom VM images
-	TODO NEXT: Create a VM from image
+Create custom VM images                                                 [X]
+
 	
-Create highly available VMs
+Create highly available VMs                                             [X]
+    Done in azure portal
+
+
+
+
 Create a VM scale set
 Load balance VMs
 	https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-internet-overview
