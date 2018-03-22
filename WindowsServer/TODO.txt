@@ -21,6 +21,12 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/windows/infrastructure-e
 
 
 
+
+
+
+
+
+
 Create and manage Windows VMs                                           [X]
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm
     
@@ -51,7 +57,11 @@ Load balance VMs
     
 Manage VMs with virtual networks
 Backup VMs
-Monitor VMs
+
+Monitor VMs                                                             [X]
+    Done in portal
+    
+    
 Manage security on VMs
 Create a continuous integration pipeline with Visual Studio
 Install a SQL\IIS\.NET stack
@@ -59,6 +69,23 @@ Secure a web server with SSL
 
 
 ===================================================================================================
+
+
+SQL Databases
+
+
+
+
+
+Web Applications
+
+
+
+
+
+
+
+
 
 
 
