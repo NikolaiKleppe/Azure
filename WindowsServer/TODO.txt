@@ -79,8 +79,11 @@ SQL Databases
 
 Web Applications
 
-
-
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb
+Deploy web app															[X]
+	.NET Core 
+	SQL database
+	GIT
 
 
 
