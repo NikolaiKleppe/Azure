@@ -7,34 +7,48 @@ $IpToAllow              = "195.204.41.0/24"
 
 $NsRuleName             = "AllowInboundWork"
 $Direction 				= "Inbound"
-$NSGName                = "NetworkSecurityGroup_01"
+$NSGName                = "NetworkSecurityGroup_03"
 
 $SubnetName             = "Subnet_01"
 $SubnetAddressPrefix    = "192.168.1.0/24"
 
-$VnetName               = "vnet_01"
+$VnetName               = "vnet_03"
 $vnet                   = Get-AzureRmVirtualNetwork | Where-Object {$_.Name -eq $VnetName}
 
+$ResourceGroupName      = "Terraria"
+
 $NICName                = "NIC_03"
-$NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" -Name $NICName
+$NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName $ResourceGroupName -Name $NICName
 
 
 
 #Network Security Group    
-$NSG = Get-AzureRmNetworkSecurityGroup | Where-Object {$_.Name -eq $NSGName} 
+Try {
+    $NSG = Get-AzureRmNetworkSecurityGroup | Where-Object {$_.Name -eq $NSGName} -ErrorAction Stop
+}
+Catch {
+    Write-Error $_
+    Exit
+}
 
 
 #Change <Add-> to <Set-> to change the rule instead
-$NsRule = Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $NSG `
-    -Name $NsRuleName `
-    -Protocol Tcp `
-    -Direction $Direction `
-    -Priority 900 `
-    -SourceAddressPrefix $IpToAllow `
-    -SourcePortRange * `
-    -DestinationAddressPrefix * `
-    -DestinationPortRange * `
-    -Access Allow
+Try {
+    $NsRule = Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $NSG `
+        -Name $NsRuleName `
+        -Protocol Tcp `
+        -Direction $Direction `
+        -Priority 900 `
+        -SourceAddressPrefix $IpToAllow `
+        -SourcePortRange * `
+        -DestinationAddressPrefix * `
+        -DestinationPortRange * `
+        -Access Allow
+}
+Catch {
+    Write-Error $_
+    Exit
+}    
 
     
 

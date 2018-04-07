@@ -3,26 +3,26 @@
 ########-Common Variables-#########
 
 #Names
-$ResourceGroup          = "myResourceGroup"
+$ResourceGroup          = "Terraria"
 $Location               = "westeurope"
 $NsRuleName             = "AllowInboundSubnetHome"
 
 #IP
 $SubnetAddressPrefix    = "192.168.1.0/24"
 $VnetAddressPrefix      = "192.168.0.0/16"
-$PublicIpName           = "publicIPaddress_04"
+$PublicIpName           = "publicIPaddress_03"
 
 #Security
 $IpToAllow              = "81.166.225.0/24"
 
 #NIC
-$NICName                = "NIC_04"
+$NICName                = "NIC_03"
 $NIC                    = Get-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" -Name $NICName -ErrorAction SilentlyContinue
 
 
-$VnetName               = "vnet_01"
-$SubnetName             = "Subnet_01"
-$NsgName                = "NetWorkSecurityGroup_01"
+$VnetName               = "vnet_03"
+$SubnetName             = "Subnet_03"
+$NsgName                = "NetWorkSecurityGroup_03"
 
 
 ####################################

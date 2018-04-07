@@ -15,19 +15,19 @@ $VmNumber = "03"
 
 
 #OS
-$ComputerName = "AW-T-$VmNumber"
-$VMSize       = "Standard_A1"
-#TODO: Change to Standard_B1S
+#$ComputerName = "AW-T-$VmNumber"
+$ComputerName = "AW-P-Terraria03"
+$VMSize       = "Standard_B1S"
 
 
-
+$ResourceGroupName = "Terraria"
 
 #DISK
 $DiskName       = "disk_$VmNumber"
 $DiskSize       = "128"
 $CreateOption   = "FromImage"
 $Caching        = "ReadWrite"
-$StorageAccount = "https://nikmystorageaccount.blob.core.windows.net/disks/"
+$StorageAccount = "https://nikazurestorage.blob.core.windows.net/disks/"
 
 
 
@@ -46,7 +46,7 @@ If ([string]::IsNullOrEmpty($NetworkInterfaceID)) {
 
 
 #RESOURCE GROUP
-$ResourceGroupName = "myResourceGroup"
+
 $ResourceGroup     = Get-AzureRmResourceGroup | Where-Object {$_.ResourceGroupName -eq $ResourceGroupName}
 
 
@@ -86,7 +86,7 @@ $vm = Set-AzureRmVMOSDisk `
     
     
     
-#Add NIC to VMdep   
+#Add NIC to VM
 $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $NetworkInterfaceID.ResourceId
 
 

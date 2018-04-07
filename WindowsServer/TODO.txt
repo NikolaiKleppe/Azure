@@ -88,6 +88,17 @@ Deploy web app															[X]
 
 
 
+B2B
+https://docs.microsoft.com/en-us/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b
+
+
+
+Cosmos DB
+https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction
+
+
+
+
 
 
 

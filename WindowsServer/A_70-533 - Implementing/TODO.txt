@@ -1,0 +1,45 @@
+https://www.microsoft.com/en-us/learning/exam-70-533.aspx
+
+Design and Implement Azure App Service Apps
+
+    Deploy Web Apps                                                             [X]
+    Configure Web Apps
+    Configure diagnostics, monitoring, and analytics
+    Configure Web Apps for scale and resilience
+
+
+
+Create and Manage Compute Resources
+    Deploy workloads on Azure Resource Manager (ARM) virtual machines (VMs)     [X]
+    Perform configuration management                                            [X]
+    Design and implement VM storage - Need to do encryption
+    Monitor ARM VMs                                                             [X]
+    Manage ARM VM availability                                                  [X]
+    Scale ARM VMs
+    Manage Containers with Azure Container Services (ACS)
+
+
+    
+    
+Design and Implement a Storage Strategy
+    Implement Azure Storage blobs and Azure Files                               [X]
+    Manage access
+    Configure diagnostics, monitoring, and analytics
+    Implement storage encryption
+
+    
+    
+    
+Implement Virtual Networks    
+    Configure virtual networks                                                  [X]
+    Design and implement multi-site or hybrid network connectivity
+    Configure ARM VM networking                                                 [X]
+    Design and implement a connection strategy
+
+    
+    
+    
+    
+    
+    
+    
