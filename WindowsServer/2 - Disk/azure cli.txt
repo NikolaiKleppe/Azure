@@ -1,0 +1,38 @@
+az backup recoverypoint list `
+    --resource-group nikbackuptest `
+    --vault-name myRecoveryServicesVault `
+    --container-name AW-T-APP02 `
+    --item-name AW-T-APP02 `
+    --query [0].name `
+    --output tsv
+    
+    
+    
+az backup restore restore-disks `
+    --resource-group nikbackuptest `
+    --vault-name myRecoveryServicesVault `
+    --container-name AW-T-APP02 `
+    --item-name AW-T-APP02 `
+    --storage-account nikstoragetest `
+    --rp-name 22504441226416 
+    
+    
+    
+az backup job list --resource-group nikbackuptest --vault-name myRecoveryServicesVault --output table
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
