@@ -1,3 +1,13 @@
+API Management in Internal VNET mode with Application Gateway integration.
+
+Mostly just copy paste commands from the docs, but for my own environment and some small adjustments
+
+AppGW commands are missing listener on port 3443 which is also required for Management traffic
+
+
+Certificates:
+Requires PFX format with full certificate chain (leaf -> intermediate CA -> root CA)
+
 1) Open certificate.crt
 2) Convert to .cer (Base 64, 2nd option)
 
